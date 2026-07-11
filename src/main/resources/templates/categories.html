@@ -25,6 +25,10 @@
 
     <h3 th:text="${category.name}"></h3>
 
+    <form th:action="@{'/categories/delete/' + ${category.id}}" method="post">
+        <button type="submit">Delete</button>
+    </form>
+
 </div>
 
 </body>

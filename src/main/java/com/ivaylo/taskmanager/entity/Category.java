@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import java.util.UUID;
 
-import java.util.UUID;
    @Entity
    @Table(name = "categories")
 public class Category {

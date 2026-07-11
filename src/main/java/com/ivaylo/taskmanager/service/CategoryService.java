@@ -3,8 +3,9 @@ package com.ivaylo.taskmanager.service;
 import com.ivaylo.taskmanager.entity.Category;
 import com.ivaylo.taskmanager.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
-
+import java.util.UUID;
 import java.util.List;
+
   @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
@@ -20,4 +21,7 @@ public class CategoryService {
     public List<Category> getAll() {
         return categoryRepository.findAll();
     }
+      public void deleteById(UUID id) {
+          categoryRepository.deleteById(id);
+      }
 }
