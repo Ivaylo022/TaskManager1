@@ -27,6 +27,10 @@
         <button type="submit">Mark Done</button>
     </form>
 
+    <form th:action="@{'/edit-task/' + ${task.id}}" method="get">
+        <button type="submit">Edit</button>
+    </form>
+
     <hr>
 
 </div>

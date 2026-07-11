@@ -41,6 +41,25 @@ public class TaskController {
         return "redirect:/tasks-page";
     }
 
+    @PostMapping("/edit/{id}")
+    public String editTask(@PathVariable UUID id,
+                           @Valid Task task,
+                           BindingResult bindingResult,
+                           Model model) {
+
+        if (bindingResult.hasErrors()) {
+            task.setId(id);
+            model.addAttribute("task", task);
+            return "edit-task";
+        }
+
+        task.setId(id);
+
+        taskService.save(task);
+
+        return "redirect:/tasks-page";
+    }
+
     @PostMapping("/delete/{id}")
     public String deleteTaskFromPage(@PathVariable UUID id) {
 

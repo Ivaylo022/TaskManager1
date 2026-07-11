@@ -1,6 +1,8 @@
 package com.ivaylo.taskmanager.controller;
 
 import com.ivaylo.taskmanager.entity.Task;
+import java.util.UUID;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 import com.ivaylo.taskmanager.service.TaskService;
 import org.springframework.stereotype.Controller;
@@ -37,8 +39,13 @@ public class HomeController {
         return "add-task";
     }
 
-    @GetMapping("/edit-task")
-    public String editTaskPage() {
+    @GetMapping("/edit-task/{id}")
+    public String editTaskPage(@PathVariable UUID id, Model model) {
+
+        model.addAttribute(
+                "task",
+                taskService.getTaskById(id));
+
         return "edit-task";
     }
 
