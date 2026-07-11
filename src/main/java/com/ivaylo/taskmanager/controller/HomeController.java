@@ -1,5 +1,6 @@
 package com.ivaylo.taskmanager.controller;
 
+import com.ivaylo.taskmanager.entity.Task;
 import org.springframework.ui.Model;
 import com.ivaylo.taskmanager.service.TaskService;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,10 @@ public class HomeController {
     }
 
     @GetMapping("/add-task")
-    public String addTaskPage() {
+    public String addTaskPage(Model model) {
+
+        model.addAttribute("task", new Task());
+
         return "add-task";
     }
 

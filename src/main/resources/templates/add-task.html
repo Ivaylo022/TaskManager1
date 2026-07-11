@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Task</title>
 </head>
@@ -7,17 +7,29 @@
 
 <h1>Add Task</h1>
 
-<form action="/tasks" method="post">
+<form th:action="@{/tasks}"
+      th:object="${task}"
+      method="post">
 
     <input type="text"
-           name="title"
+           th:field="*{title}"
            placeholder="Title">
+
+    <div style="color:red"
+         th:if="${#fields.hasErrors('title')}"
+         th:errors="*{title}">
+    </div>
 
     <br><br>
 
     <input type="text"
            name="description"
            placeholder="Description">
+
+    <div style="color:red"
+         th:if="${#fields.hasErrors('description')}"
+         th:errors="*{description}">
+    </div>
 
     <br><br>
 

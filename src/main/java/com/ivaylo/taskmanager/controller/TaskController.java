@@ -1,5 +1,8 @@
 package com.ivaylo.taskmanager.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import com.ivaylo.taskmanager.entity.Task;
 import com.ivaylo.taskmanager.service.TaskService;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +26,15 @@ public class TaskController {
     }
 
     @PostMapping
-    public String createTask(Task task) {
+    public String createTask(
+            @Valid Task task,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("task", task);
+            return "add-task";
+        }
 
         taskService.createTask(task);
 
