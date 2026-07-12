@@ -1,5 +1,7 @@
 package com.ivaylo.taskmanager.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,12 +11,14 @@ import java.util.UUID;
 
    @Entity
    @Table(name = "categories")
-public class Category {
+    public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String name;
+       @NotBlank
+       @Size(min = 2, max = 30)
+       private String name;
 
     public Category() {
     }

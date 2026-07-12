@@ -1,5 +1,7 @@
 package com.ivaylo.taskmanager.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 import com.ivaylo.taskmanager.entity.Category;
 import com.ivaylo.taskmanager.service.CategoryService;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ public class CategoryController {
     @GetMapping("/categories")
     public String categories(Model model) {
 
+        model.addAttribute("category", new Category());
+
         model.addAttribute(
                 "categories",
                 categoryService.getAll());
@@ -28,12 +32,22 @@ public class CategoryController {
     }
 
     @PostMapping("/categories")
-    public String addCategory(Category category) {
+    public String addCategory(@Valid Category category,
+                              BindingResult bindingResult,
+                              Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("categories", categoryService.getAll());
+
+            return "categories";
+        }
 
         categoryService.save(category);
 
         return "redirect:/categories";
     }
+
     @PostMapping("/categories/delete/{id}")
     public String deleteCategory(@PathVariable UUID id) {
 
